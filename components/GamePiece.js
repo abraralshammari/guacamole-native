@@ -23,7 +23,7 @@ export default class GamePiece extends React.Component {
         }
 
         return(
-            <TouchableHighlight style={{margin: 10}} onPress={this.props.type === 'mole' ? this.props.updatePiece : null}>
+            <TouchableHighlight style={{margin: 10}} activeOpacity={1} onPress={this.props.type === 'mole' ? this.props.updatePiece : null}>
                 <View>
                     {piece}
                 </View>

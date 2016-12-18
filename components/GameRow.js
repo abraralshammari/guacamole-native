@@ -14,9 +14,11 @@ export default class GameRow extends React.Component {
       <View style={styles.gameRow}>
         {
           this.props.half.map( (type, index) => {
+            index+=this.props.indexStart;
             return (
               <View>
-                <GamePiece updatePiece={ () => this.props.Guac(index+this.props.indexStart)} type={type} key={index} />
+                <GamePiece updatePiece={ () => this.props.Guac(index)} type={type} key={index} />
+                <Text>{index}</Text>
               </View>
             );
           })

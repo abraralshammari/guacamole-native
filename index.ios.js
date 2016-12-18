@@ -12,13 +12,13 @@ import {
   View
 } from 'react-native';
 
-import GameBoard from './components/GameBoard.js'
+import App from './components/App.js'
 
 export default class guacamole extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <GameBoard />
+        <App />
       </View>
     );
   }
