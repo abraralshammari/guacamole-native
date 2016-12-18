@@ -6,10 +6,12 @@ import {
   Image
 } from 'react-native';
 
+import MoleImg from '../img/mole.jpg';
+
 export default class Mole extends Component {
   render() {
     return (
-        <Image source={require('../img/mole.jpg')}  style={this.props.style}/>
+        <Image source={MoleImg}  style={this.props.style}/>
     );
   }
 }

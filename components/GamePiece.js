@@ -11,10 +11,6 @@ import Hole from './Hole.js'
 import Guac from './Guac.js'
 
 export default class GamePiece extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         let piece = <View />;
         if(this.props.type === 'hole') {
@@ -34,7 +30,7 @@ export default class GamePiece extends React.Component {
             </TouchableHighlight>
         );
     }
-    
+
 }
 
 const styles = StyleSheet.create({

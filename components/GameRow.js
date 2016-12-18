@@ -9,9 +9,6 @@ import {
 import GamePiece from './GamePiece.js';
 
 export default class GameRow extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <View style={styles.gameRow}>

@@ -7,23 +7,18 @@ import {
   View
 } from 'react-native';
 
-import GamePiece from './GamePiece.js'
-import GameRow from './GameRow.js'
+import GamePiece from './GamePiece.js';
+import GameRow from './GameRow.js';
+import GameOver from './GameOver.js';
 
 export default class GameBoard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      score: 0,
-      gamepieces: ['hole', 'hole', 'hole', 'hole', 'hole', 'hole'],
-      gameover: false,
-    };
+  state = {
+    score: 0,
+    gamepieces: ['hole', 'hole', 'hole', 'hole', 'hole', 'hole'],
+    gameover: false,
+  };
 
-    this._guaced = this._guaced.bind(this);
-    this._loadMole = this._loadMole.bind(this);
-  }
-
-  _guaced(index) {
+  _guaced = (index) => {
     let curPieces = this.state.gamepieces;
     let curScore = this.state.score;
     curPieces[index] = 'guac';
@@ -31,7 +26,7 @@ export default class GameBoard extends Component {
     this.setState({gamepieces: curPieces, score: curScore});
   }
 
-  _loadMole() {
+  _loadMole = () => {
     setTimeout(() => {
       var index = Math.floor(Math.random() * (6 - 0) + 0);
 
@@ -46,7 +41,7 @@ export default class GameBoard extends Component {
     }, 300);
   }
 
-  _restart(){
+  _restart = () => {
     this.setState({gameover: false});
   }
 
@@ -81,10 +76,10 @@ export default class GameBoard extends Component {
         <Text style={styles.title}>Guac-a-mole!!!</Text>
         <View style={styles.board}>
 
-          {/* Make Score and GameOver components */}
+          {/* Make Score component */}
           <Text>Current Score: {this.state.score} </Text>
 
-          {this.state.gameover === true ? <Text>Game Over!</Text> : board}
+        {this.state.gameover === true ? <GameOver restart={this._restart} /> : board}
 
         </View>
       </View>
