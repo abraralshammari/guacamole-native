@@ -26,15 +26,15 @@ export default class App extends Component {
 
   _loadMole = () => {
     setTimeout(() => {
-      var index = Math.floor(Math.random() * (this.state.gamepieces.length - 0) + 0);
+      let index = Math.floor(Math.random() * (this.state.gamepieces.length - 0) + 0);
 
-      var newPieces = this.state.gamepieces;
+      let newPieces = this.state.gamepieces;
       newPieces[index] = 'mole';
       this.setState({gamepieces: newPieces});
     }, 2500);
 
     setTimeout(() => {
-      var defaultPieces = ['hole', 'hole', 'hole', 'hole', 'hole', 'hole'];
+      const defaultPieces = ['hole', 'hole', 'hole', 'hole', 'hole', 'hole'];
       this.setState({gamepieces: defaultPieces});
     }, 300);
   }
