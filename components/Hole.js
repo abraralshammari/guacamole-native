@@ -6,10 +6,12 @@ import {
   Image
 } from 'react-native';
 
+import HoleImg from '../img/hole.png';
+
 export default class Hole extends Component {
   render() {
     return (
-        <Image source={require('../img/hole.jpg')}  style={this.props.style} />
+        <Image source={HoleImg}  style={this.props.style} />
     );
   }
 }

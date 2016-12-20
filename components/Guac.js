@@ -6,10 +6,12 @@ import {
   Image
 } from 'react-native';
 
+import GuacImg from '../img/guac.png';
+
 export default class Guac extends Component {
   render() {
     return (
-        <Image source={require('../img/guacamole.jpg')} style={this.props.style} />
+        <Image source={GuacImg} style={this.props.style} />
     );
   }
 }

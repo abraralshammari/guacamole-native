@@ -6,7 +6,7 @@ import {
   Image
 } from 'react-native';
 
-import MoleImg from '../img/mole.jpg';
+import MoleImg from '../img/mole.png';
 
 export default class Mole extends Component {
   render() {
