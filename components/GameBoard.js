@@ -9,8 +9,47 @@ import {
 import GameRow from './GameRow.js';
 
 export default class GameBoard extends React.Component {
+  state = {
+    pieces: [],
+    defaultPieces: [],
+  };
+
+  _guaced = (index) => {
+    let curPieces = this.state.pieces;
+    let curScore = this.props.score;
+    curPieces[index] = 'guac';
+    curScore+=1;
+    this.setState({pieces: curPieces});
+
+    setTimeout(() => {
+      let defaultPieces = Array(this.props.holes).fill('hole');
+      this.setState({pieces: defaultPieces});
+    }, 500);
+  }
+
+  _loadMole = () => {
+    setTimeout(() => {
+      let defaultPieces = Array(this.props.holes).fill('hole');
+      this.setState({pieces: defaultPieces});
+    }, 500);
+
+    setTimeout(() => {
+      let index = Math.floor(Math.random() * (this.props.holes - 0) + 0);
+      let newPieces = this.state.pieces;
+      newPieces[index] = 'mole';
+      this.setState({pieces: newPieces});
+    }, 2000);
+
+    setTimeout(() => {
+      let defaultPieces = Array(this.props.holes).fill('hole');
+      this.setState({pieces: defaultPieces});
+    }, 300);
+  }
+
   componentDidMount() {
-    this.intervalID = setInterval(this.props.loadMole, 3000);
+    let defaultPieces = Array(this.props.holes).fill('hole');
+    this.setState({pieces: defaultPieces});
+    this.intervalID = setInterval(this._loadMole, 3000);
     setTimeout(this.props.endGame, 30000);
   }
 
@@ -19,13 +58,15 @@ export default class GameBoard extends React.Component {
   }
 
   render() {
-    let pieces = this.props.pieces;
-    let firstHalf = pieces.slice(0, pieces.length/2);
-    let secondHalf = pieces.slice(pieces.length/2, pieces.length);
+    let pieces = this.state.pieces;
+    let firstHalf = pieces.slice(0, 3);
+    let secondHalf = pieces.slice(3, 6);
+    let thirdHalf = pieces.slice(6, this.state.pieces.length);
     return(
       <View>
-        <GameRow Guac={this.props.Guac} indexStart={0} half={firstHalf}/>
-        <GameRow Guac={this.props.Guac} indexStart={this.props.pieces.length/2} half={secondHalf}/>
+        <GameRow Guac={this._guaced} indexStart={0} half={firstHalf}/>
+        <GameRow Guac={this._guaced} indexStart={3} half={secondHalf}/>
+        <GameRow Guac={this._guaced} indexStart={6} half={thirdHalf}/>
       </View>
     );
   }

@@ -12,32 +12,8 @@ import GameOver from './GameOver.js';
 export default class App extends Component {
   state = {
     score: 0,
-    gamepieces: ['hole', 'hole', 'hole', 'hole', 'hole', 'hole'],
     gameover: false,
   };
-
-  _guaced = (index) => {
-    let curPieces = this.state.gamepieces;
-    let curScore = this.state.score;
-    curPieces[index] = 'guac';
-    curScore+=1;
-    this.setState({gamepieces: curPieces, score: curScore});
-  }
-
-  _loadMole = () => {
-    setTimeout(() => {
-      let index = Math.floor(Math.random() * (this.state.gamepieces.length - 0) + 0);
-
-      let newPieces = this.state.gamepieces;
-      newPieces[index] = 'mole';
-      this.setState({gamepieces: newPieces});
-    }, 2500);
-
-    setTimeout(() => {
-      const defaultPieces = ['hole', 'hole', 'hole', 'hole', 'hole', 'hole'];
-      this.setState({gamepieces: defaultPieces});
-    }, 300);
-  }
 
   _endGame = () => {
     this.setState({gameover: true});
@@ -47,7 +23,6 @@ export default class App extends Component {
     this.setState({
       gameover: false,
       score: 0,
-      gamepieces: ['hole', 'hole', 'hole', 'hole', 'hole', 'hole'],
     });
   }
 
@@ -61,7 +36,7 @@ export default class App extends Component {
           {/* Make Score component */}
           <Text>Current Score: {this.state.score} </Text>
 
-          {this.state.gameover === true ? <GameOver restart={this._restart} /> : <GameBoard loadMole={this._loadMole} Guac={this._guaced} endGame={this._endGame} pieces={this.state.gamepieces} />}
+          {this.state.gameover === true ? <GameOver restart={this._restart} /> : <GameBoard holes={9} score={this.state.score} endGame={this._endGame} />}
 
         </View>
       </View>
