@@ -8,12 +8,18 @@ import {
 
 import GameBoard from './GameBoard.js';
 import GameOver from './GameOver.js';
+import Menu from './Menu.js';
 
 export default class App extends Component {
   state = {
     score: 0,
     gameover: false,
+    holes: 0,
   };
+
+  _setup = (num) => {
+    this.setState({holes: num});
+  }
 
   _endGame = () => {
     this.setState({gameover: true});
@@ -26,19 +32,30 @@ export default class App extends Component {
     });
   }
 
+  _updateScore = () => {
+    let newScore = this.state.score + 1;
+    this.setState({score: newScore});
+  }
+
   render() {
     return (
       <View>
         <View style={{flex: .25}} />
         <Text style={styles.title}>Guac-a-mole!!!</Text>
-        <View style={styles.board}>
+        {this.state.holes === 0 ?
+          <View style={styles.board}>
+            <Menu setup={this._setup} />
+          </View> :
+          <View style={styles.board}>
 
-          {/* Make Score component */}
-          <Text>Current Score: {this.state.score} </Text>
+            <Text>Current Score: {this.state.score} </Text>
 
-          {this.state.gameover === true ? <GameOver restart={this._restart} /> : <GameBoard holes={9} score={this.state.score} endGame={this._endGame} />}
+            {this.state.gameover === true ? <GameOver restart={this._restart} /> :
+            <GameBoard updateScore={this._updateScore} holes={this.state.holes} score={this.state.score} endGame={this._endGame} />}
 
-        </View>
+          </View>
+        }
+
       </View>
     );
   }

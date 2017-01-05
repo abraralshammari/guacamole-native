@@ -8,6 +8,8 @@ import {
 
 import GameRow from './GameRow.js';
 
+const ROW_NUM = 3;
+
 export default class GameBoard extends React.Component {
   state = {
     pieces: [],
@@ -16,9 +18,8 @@ export default class GameBoard extends React.Component {
 
   _guaced = (index) => {
     let curPieces = this.state.pieces;
-    let curScore = this.props.score;
     curPieces[index] = 'guac';
-    curScore+=1;
+    this.props.updateScore();
     this.setState({pieces: curPieces});
 
     setTimeout(() => {
@@ -59,14 +60,22 @@ export default class GameBoard extends React.Component {
 
   render() {
     let pieces = this.state.pieces;
-    let firstHalf = pieces.slice(0, 3);
-    let secondHalf = pieces.slice(3, 6);
-    let thirdHalf = pieces.slice(6, this.state.pieces.length);
+    let numPortions = this.props.holes/ROW_NUM;
+    let portions = [];
+    for(let i=0; i<numPortions; i++){
+      portions.push(pieces.slice(i*ROW_NUM, i*ROW_NUM + ROW_NUM));
+    }
+    
     return(
       <View>
-        <GameRow Guac={this._guaced} indexStart={0} half={firstHalf}/>
-        <GameRow Guac={this._guaced} indexStart={3} half={secondHalf}/>
-        <GameRow Guac={this._guaced} indexStart={6} half={thirdHalf}/>
+        {/* <Text>{portions}</Text> */}
+        {portions.map((portion, index) => {
+          return (
+            <View key={index}>
+              <GameRow Guac={this._guaced} indexStart={index*3} half={portion} />
+            </View>
+          );
+        })}
       </View>
     );
   }
