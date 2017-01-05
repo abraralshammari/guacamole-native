@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  AsyncStorage,
   TouchableHighlight,
   StyleSheet,
   Text,
@@ -12,6 +13,7 @@ import Menu from './Menu.js';
 
 export default class App extends Component {
   state = {
+    currentHigh: 0,
     score: 0,
     gameover: false,
     holes: 0,
@@ -22,6 +24,31 @@ export default class App extends Component {
   }
 
   _endGame = () => {
+    // async () => {
+    //   try {
+    //     await AsyncStorage.setItem('highScore', this.state.score.toString());
+    //   } catch (error) {
+    //     console.log('Error saving data');
+    //   }
+    // }
+    // async () => {
+    //   try {
+    //     const value = await AsyncStorage.getItem('highScore');
+    //     if (value !== null){
+    //       this.setState({currentHigh: value});
+    //     }
+    //   } catch (error) {
+    //     console.log('No current high score');
+    //   }
+    // }
+    if(this.state.score > this.state.currentHigh) {
+      AsyncStorage.setItem('highScore', this.state.score.toString());
+    }
+
+    AsyncStorage.getItem('highScore').then((value) => {
+        this.setState({currentHigh: value});
+    }).done();
+
     this.setState({gameover: true});
   }
 
@@ -37,6 +64,22 @@ export default class App extends Component {
     this.setState({score: newScore});
   }
 
+  componentDidMount() {
+    // async () => {
+    //   try {
+    //     const value = await AsyncStorage.getItem('highScore');
+    //     if (value !== null){
+    //       this.setState({currentHigh: value});
+    //     }
+    //   } catch (error) {
+    //     console.log('No current high score')
+    //   }
+    // }
+    AsyncStorage.getItem('highScore').then((value) => {
+        this.setState({currentHigh: value});
+    }).done();
+  }
+
   render() {
     return (
       <View>
@@ -48,6 +91,7 @@ export default class App extends Component {
           </View> :
           <View style={styles.board}>
 
+            <Text>Current High Score: {this.state.currentHigh} </Text>
             <Text>Current Score: {this.state.score} </Text>
 
             {this.state.gameover === true ? <GameOver restart={this._restart} /> :

@@ -65,10 +65,9 @@ export default class GameBoard extends React.Component {
     for(let i=0; i<numPortions; i++){
       portions.push(pieces.slice(i*ROW_NUM, i*ROW_NUM + ROW_NUM));
     }
-    
+
     return(
       <View>
-        {/* <Text>{portions}</Text> */}
         {portions.map((portion, index) => {
           return (
             <View key={index}>
