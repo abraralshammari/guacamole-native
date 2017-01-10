@@ -22,7 +22,7 @@ export default class GameBoard extends React.Component {
     this.props.updateScore();
     this.setState({pieces: curPieces});
 
-    setTimeout(() => {
+    this.refillHoleTimeout = setTimeout(() => {
       let defaultPieces = Array(this.props.holes).fill('hole');
       this.setState({pieces: defaultPieces});
     }, 500);
@@ -56,6 +56,7 @@ export default class GameBoard extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.intervalID);
+    clearTimeout(this.refillHoleTimeout);
   }
 
   render() {
