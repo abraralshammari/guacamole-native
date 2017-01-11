@@ -11,13 +11,13 @@ export default class Menu extends React.Component {
     return(
       <View>
         <TouchableHighlight onPress={() => this.props.setup(3)}>
-          <Text style={styles.holeText}>3 holes</Text>
+          <Text style={styles.basicText}>3 holes</Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={() => this.props.setup(6)}>
-          <Text style={styles.holeText}>6 holes</Text>
+          <Text style={styles.basicText}>6 holes</Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={() => this.props.setup(9)}>
-          <Text style={styles.holeText}>9 holes</Text>
+          <Text style={styles.basicText}>9 holes</Text>
         </TouchableHighlight>
       </View>
     );
@@ -25,15 +25,8 @@ export default class Menu extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    flex: .25,
-    fontSize: 40,
-    textAlign: 'center',
-    alignItems: 'center',
-  },
-  holeText: {
+  basicText: {
     fontSize: 25,
     padding: 10,
-  }
-
+  },
 });

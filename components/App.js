@@ -91,8 +91,8 @@ export default class App extends Component {
           </View> :
           <View style={styles.board}>
 
-            <Text>Current High Score: {this.state.currentHigh} </Text>
-            <Text>Current Score: {this.state.score} </Text>
+            <Text style={styles.basicText}>Current High Score: {this.state.currentHigh} </Text>
+            <Text style={styles.basicText}>Current Score: {this.state.score} </Text>
 
             {this.state.gameover === true ? <GameOver restart={this._restart} /> :
             <GameBoard updateScore={this._updateScore} holes={this.state.holes} score={this.state.score} endGame={this._endGame} />}
@@ -121,6 +121,10 @@ const styles = StyleSheet.create({
   gameRow: {
     padding: 10,
     flexDirection: 'row',
-  }
+  },
+  basicText: {
+    fontSize: 25,
+    padding: 10,
+  },
 
 });

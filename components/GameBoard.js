@@ -17,6 +17,8 @@ export default class GameBoard extends React.Component {
   };
 
   _guaced = (index) => {
+    //shows guaced mole for slightly longer
+    clearTimeout(this.resetTimeout);
     let curPieces = this.state.pieces;
     curPieces[index] = 'guac';
     this.props.updateScore();
@@ -32,19 +34,19 @@ export default class GameBoard extends React.Component {
     setTimeout(() => {
       let defaultPieces = Array(this.props.holes).fill('hole');
       this.setState({pieces: defaultPieces});
-    }, 500);
+    }, 300);
 
     setTimeout(() => {
       let index = Math.floor(Math.random() * (this.props.holes - 0) + 0);
       let newPieces = this.state.pieces;
       newPieces[index] = 'mole';
       this.setState({pieces: newPieces});
-    }, 2000);
+    }, 2500);
 
-    setTimeout(() => {
+    this.resetTimeout = setTimeout(() => {
       let defaultPieces = Array(this.props.holes).fill('hole');
       this.setState({pieces: defaultPieces});
-    }, 300);
+    }, 100);
   }
 
   componentDidMount() {
